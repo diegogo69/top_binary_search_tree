@@ -7,21 +7,21 @@ const t = new Tree(root);
 t.prettyPrint();
 
 t.insert(66)
-// t.insert(65)
+t.insert(323)
 
 t.prettyPrint();
 
-t.root = Tree.deleteItem(3, t.root);
+// t.root = Tree.deleteItem(3, t.root);
 
 t.prettyPrint();
 
-t.root = Tree.deleteItem(5, t.root);
+// t.root = Tree.deleteItem(5, t.root);
 
 t.prettyPrint();
 
-t.root = Tree.deleteItem(23, t.root);
+t.root = Tree.deleteItem(67, t.root);
 
 t.prettyPrint();
 
-console.log(t.max());
-console.log(t.min());
+// console.log(t.max());
+// console.log(t.min());

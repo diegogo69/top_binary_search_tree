@@ -41,7 +41,7 @@ class Tree {
     return this.#createBST(sorted, 0, sorted.length - 1);
   }
 
-  max(node = this.root) {
+  static max(node = this.root) {
     if (node.right === null) return node
 
     node = this.max(node.right);
@@ -49,13 +49,15 @@ class Tree {
     return node;
   }
 
-  min(node = this.root) {
+  static min(node = this.root) {
     if (node.left === null) return node
 
     node = this.min(node.left)
 
     return node
   }
+
+
 
   insert(value, node = this.root) {
     if (node === null) {
@@ -86,6 +88,7 @@ class Tree {
     } else if (value < node.data) {
       node.left = this.deleteItem(value, node.left);
     } else {
+
       if (!node.left && !node.right) {
         return null;
       }
@@ -97,8 +100,21 @@ class Tree {
       if (!node.right) {
         return node.left;
       }
-    }
 
+      // Remove Node with two children
+
+      // First. Look for the minimun of the node's right child
+      const minimunNode = this.min(node.right);
+      
+      // Take its value. And remove the node (single child removal)
+      const minimunVal = minimunNode.data;
+      node = this.deleteItem(minimunVal, node);
+
+      // Replace node's value with picked value
+      node.data = minimunVal;
+    } 
+
+    // Return node to keep the chain
     return node;
   }
 
