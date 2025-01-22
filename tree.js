@@ -2,9 +2,11 @@ import Node from "./node.js";
 import Queue from "./queue.js";
 
 class Tree {
-  constructor(root) {
+  constructor(root = null) {
     this.root = root;
   }
+
+  #callbackErr = "ARGUMENT ERROR: A callback function is required as first argument";
 
   // takes an array of data and turns it into a balanced binary tree
   // The tree is populate with Node objects appropriately placed
@@ -138,6 +140,9 @@ class Tree {
   }
 
   levelOrder(fn) {
+    if (typeof fn !== "function")
+      throw this.#callbackErr;
+
     const queue = new Queue();
 
     queue.add(this.root);
@@ -159,6 +164,9 @@ class Tree {
   }
 
   inOrder(fn, node = this.root) {
+    if (typeof fn !== "function")
+      throw this.#callbackErr;
+
     if (node === null) return;
 
     this.inOrder(fn, node.left);
@@ -169,24 +177,31 @@ class Tree {
   }
 
   preOrder(fn, node = this.root) {
+    if (typeof fn !== "function")
+      throw this.#callbackErr;
+
     if (node === null) return;
 
     fn(node);
-    
+
     this.inOrder(fn, node.left);
 
     this.inOrder(fn, node.right);
   }
 
   postOrder(fn, node = this.root) {
+    if (typeof fn !== "function")
+      throw this.#callbackErr;
+
     if (node === null) return;
 
     this.inOrder(fn, node.left);
 
     this.inOrder(fn, node.right);
-    
+
     fn(node);
   }
+
 
   prettyPrint(node = this.root, prefix = "", isLeft = true) {
     if (node === null) {
