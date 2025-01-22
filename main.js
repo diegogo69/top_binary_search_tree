@@ -28,7 +28,22 @@ t.prettyPrint();
 // console.log(t.max());
 // console.log(t.min());
 
-t.levelOrder(a => console.log(a.data));
+// t.levelOrder();
+// t.levelOrder(a => console.log(a.data));
 
 console.log('--------------------------------')
-t.inOrder(a => console.log(a.data));
+// t.inOrder();
+// t.inOrder(a => console.log(a.data));
+
+
+console.log('Height: ' + t.height());
+
+// const tt = new Tree();
+// console.log('Height: ' + tt.height());
+
+const n23 = t.find(23);
+const n24 = t.find(24);
+const n23h = t.depth(n23);
+const n24h = t.depth(n24);
+console.log(n23h);
+console.log(n24h);

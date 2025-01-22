@@ -237,6 +237,24 @@ class Tree {
     return count;
   }
 
+  depth(node, current = this.root, count = 0) {
+    if (node === null) return null
+
+    if (current === null) return null
+
+    // Compare node to current
+    // If they're equal return count
+    if (node === current) {
+      return count
+    }
+
+    // Check both right and left subtrees recursively
+    // Until a match is found wich return the count
+    // Or until the whole tree is searched but no match found
+    // Each time the function is called recursively for a child node
+    // It pass the current count of edges plus 1, that between current and child node
+    return this.depth(node, current.left, count + 1) || this.depth(node, current.right, count + 1);
+  }
 
   prettyPrint(node = this.root, prefix = "", isLeft = true) {
     if (node === null) {
