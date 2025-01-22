@@ -1,13 +1,14 @@
 import Tree from "./tree.js";
 
-const arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
+const arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 68, 6345, 324];
 const root = Tree.buildFrom(arr);
 const t = new Tree(root);
 
 t.prettyPrint();
 
-t.insert(66)
+t.insert(65)
 t.insert(323)
+t.insert(67)
 
 t.prettyPrint();
 
@@ -19,7 +20,7 @@ t.prettyPrint();
 
 t.prettyPrint();
 
-t.root = Tree.deleteItem(67, t.root);
+// t.root = Tree.deleteItem(67, t.root);
 
 t.prettyPrint();
 
@@ -47,3 +48,6 @@ const n23h = t.depth(n23);
 const n24h = t.depth(n24);
 console.log(n23h);
 console.log(n24h);
+
+const b = t.isBalanced();
+console.log(b);

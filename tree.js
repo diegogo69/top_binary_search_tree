@@ -256,6 +256,24 @@ class Tree {
     return this.depth(node, current.left, count + 1) || this.depth(node, current.right, count + 1);
   }
 
+  // Write an isBalanced function that checks if the tree is balanced.
+  // A balanced tree is one where the difference between heights
+  // of the left subtree and the right subtree of every node
+  // is not more than 1.
+  isBalanced(node = this.root) {
+    if (node === null) return true
+
+    const leftH = this.height(node.left);
+    const rightH = this.height(node.right);
+
+    const difference = leftH - rightH;
+    if (difference >= -1 && difference <= 1) {
+      return true
+    }
+
+    return false
+  }
+
   prettyPrint(node = this.root, prefix = "", isLeft = true) {
     if (node === null) {
       return;
