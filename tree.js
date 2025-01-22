@@ -43,7 +43,7 @@ class Tree {
   }
 
   static max(node = this.root) {
-    if (node.right === null) return node
+    if (node.right === null) return node;
 
     node = this.max(node.right);
 
@@ -51,14 +51,12 @@ class Tree {
   }
 
   static min(node = this.root) {
-    if (node.left === null) return node
+    if (node.left === null) return node;
 
-    node = this.min(node.left)
+    node = this.min(node.left);
 
-    return node
+    return node;
   }
-
-
 
   insert(value, node = this.root) {
     if (node === null) {
@@ -88,13 +86,12 @@ class Tree {
     // If greater delete recursively in right node
     // If lesser delete recursively in left node
     // If equal eval cases based on the node children:
-    // leaf node, single child or two children 
+    // leaf node, single child or two children
     if (value > node.data) {
       node.right = this.deleteItem(value, node.right);
     } else if (value < node.data) {
       node.left = this.deleteItem(value, node.left);
     } else {
-
       if (!node.left && !node.right) {
         return null;
       }
@@ -111,14 +108,14 @@ class Tree {
 
       // First. Look for the minimun of the node's right child
       const minimunNode = this.min(node.right);
-      
+
       // Take its value. And remove the node (single child removal)
       const minimunVal = minimunNode.data;
       node = this.deleteItem(minimunVal, node);
 
       // Replace node's value with picked value
       node.data = minimunVal;
-    } 
+    }
 
     // Return node to keep the chain
     return node;
@@ -126,19 +123,17 @@ class Tree {
 
   find(value, node = this.root) {
     if (node === null) {
-      console.log('Not found')
-      return null
+      console.log("Not found");
+      return null;
     }
 
     if (value > node.data) {
       return this.find(value, node.right);
-
     } else if (value < node.data) {
       return this.find(value, node.left);
-
-    } else { 
-      console.log('Found!')
-      return node
+    } else {
+      console.log("Found!");
+      return node;
     }
   }
 
@@ -153,7 +148,7 @@ class Tree {
       if (node !== null) {
         // Visit node
         fn(node);
-  
+
         // Add children to queue
         queue.add(node.left);
         queue.add(node.right);
@@ -161,6 +156,36 @@ class Tree {
 
       node = queue.get();
     }
+  }
+
+  inOrder(fn, node = this.root) {
+    if (node === null) return;
+
+    this.inOrder(fn, node.left);
+
+    fn(node);
+
+    this.inOrder(fn, node.right);
+  }
+
+  preOrder(fn, node = this.root) {
+    if (node === null) return;
+
+    fn(node);
+    
+    this.inOrder(fn, node.left);
+
+    this.inOrder(fn, node.right);
+  }
+
+  postOrder(fn, node = this.root) {
+    if (node === null) return;
+
+    this.inOrder(fn, node.left);
+
+    this.inOrder(fn, node.right);
+    
+    fn(node);
   }
 
   prettyPrint(node = this.root, prefix = "", isLeft = true) {

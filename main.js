@@ -29,3 +29,6 @@ t.prettyPrint();
 // console.log(t.min());
 
 t.levelOrder(a => console.log(a.data));
+
+console.log('--------------------------------')
+t.inOrder(a => console.log(a.data));
