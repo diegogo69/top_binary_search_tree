@@ -5,3 +5,8 @@ const root = Tree.buildFrom(arr);
 const t = new Tree(root);
 
 t.prettyPrint();
+
+t.insert(66)
+t.insert(65)
+
+t.prettyPrint();

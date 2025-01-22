@@ -10,7 +10,7 @@ class Tree {
   // (don’t forget to sort and remove duplicates!).
   // return the level-0 root node.
   static #createBST(arr, start, end) {
-    if (start > end) return null
+    if (start > end) return null;
 
     const mid = Math.floor((start + end) / 2);
     if (mid < 0 || mid >= arr.length) {
@@ -39,6 +39,27 @@ class Tree {
     console.log(sorted)
 
     return this.#createBST(sorted, 0, sorted.length - 1);    
+  }
+
+  insert(key, node=this.root) {
+    console.log('Insert happennig')
+    if (node === null) {
+      // node = new Node(key);
+      return true
+    }
+
+    // No duplicates allowed
+    if (key > node.data) {
+      if (this.insert(key, node.right)) {
+        node.right = new Node(key);
+      }
+    } else if (key < node.data) {
+      if (this.insert(key, node.left)) {
+        node.left = new Node(key);
+      }
+    }
+
+    return
   }
 
   prettyPrint(node=this.root, prefix = "", isLeft = true) {
