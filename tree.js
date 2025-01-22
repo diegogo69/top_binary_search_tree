@@ -20,15 +20,15 @@ class Tree {
     const rootNode = new Node(arr[mid]);
     rootNode.left = this.#createBST(arr, start, mid - 1);
     rootNode.right = this.#createBST(arr, mid + 1, end);
-    return rootNode
+    return rootNode;
   }
 
   static #sortArr(arr) {
     const sorted = [];
 
     for (let el of arr) {
-     if (sorted.includes(el)) continue
-     sorted.push(el);
+      if (sorted.includes(el)) continue;
+      sorted.push(el);
     }
 
     return sorted.sort((a, b) => a - b);
@@ -36,45 +36,88 @@ class Tree {
 
   static buildFrom(arr) {
     const sorted = this.#sortArr(arr);
-    console.log(sorted)
+    console.log(sorted);
 
-    return this.#createBST(sorted, 0, sorted.length - 1);    
+    return this.#createBST(sorted, 0, sorted.length - 1);
   }
 
-  insert(key, node=this.root) {
-    console.log('Insert happennig')
+  max(node = this.root) {
+    if (node.right === null) return node
+
+    node = this.max(node.right);
+
+    return node;
+  }
+
+  min(node = this.root) {
+    if (node.left === null) return node
+
+    node = this.min(node.left)
+
+    return node
+  }
+
+  insert(value, node = this.root) {
     if (node === null) {
-      // node = new Node(key);
-      return true
+      // node = new Node(value);
+      return true;
     }
 
     // No duplicates allowed
-    if (key > node.data) {
-      if (this.insert(key, node.right)) {
-        node.right = new Node(key);
+    if (value > node.data) {
+      if (this.insert(value, node.right)) {
+        node.right = new Node(value);
       }
-    } else if (key < node.data) {
-      if (this.insert(key, node.left)) {
-        node.left = new Node(key);
+    } else if (value < node.data) {
+      if (this.insert(value, node.left)) {
+        node.left = new Node(value);
       }
     }
 
-    return
+    return;
   }
 
-  prettyPrint(node=this.root, prefix = "", isLeft = true) {
+  static deleteItem(value, node) {
+    // Item with no children
+    if (node === null) return null;
+
+    if (value > node.data) {
+      node.right = this.deleteItem(value, node.right);
+    } else if (value < node.data) {
+      node.left = this.deleteItem(value, node.left);
+    } else {
+      if (!node.left && !node.right) {
+        return null;
+      }
+
+      if (!node.left) {
+        return node.right;
+      }
+
+      if (!node.right) {
+        return node.left;
+      }
+    }
+
+    return node;
+  }
+
+  prettyPrint(node = this.root, prefix = "", isLeft = true) {
     if (node === null) {
       return;
     }
     if (node.right !== null) {
-      this.prettyPrint(node.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
+      this.prettyPrint(
+        node.right,
+        `${prefix}${isLeft ? "│   " : "    "}`,
+        false
+      );
     }
     console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
     if (node.left !== null) {
       this.prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
     }
-  };
-
+  }
 }
 
-export default Tree
+export default Tree;
