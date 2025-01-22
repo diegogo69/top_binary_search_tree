@@ -274,6 +274,21 @@ class Tree {
     return false
   }
 
+  // Write a rebalance function that rebalances an unbalanced tree.
+  // Tip: You’ll want to use a traversal method to provide
+  // a new array to the buildTree function.
+
+  rebalance() {
+    // Create array for tree values
+    const treeValues = [];
+
+    // Traverse tree and populate array
+    this.inOrder(node => treeValues.push(node.data));
+
+    // build a new balanced tree
+    this.root = Tree.buildFrom(treeValues);
+  }
+
   prettyPrint(node = this.root, prefix = "", isLeft = true) {
     if (node === null) {
       return;

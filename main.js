@@ -8,7 +8,6 @@ t.prettyPrint();
 
 t.insert(65)
 t.insert(323)
-t.insert(67)
 
 t.prettyPrint();
 
@@ -49,5 +48,19 @@ const n24h = t.depth(n24);
 console.log(n23h);
 console.log(n24h);
 
-const b = t.isBalanced();
+let b = t.isBalanced();
 console.log(b);
+
+t.insert(67)
+
+t.prettyPrint();
+
+
+b = t.isBalanced();
+console.log(b);
+
+console.log('--------------------------------')
+
+t.rebalance();
+t.prettyPrint();
+console.log('--- REBALANCED ---');
