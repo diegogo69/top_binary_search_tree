@@ -202,6 +202,41 @@ class Tree {
     fn(node);
   }
 
+  // Count the number of edges in the longest path from a given node
+  // Initialize a count variable
+  // If node is null return 0
+  // Count current level
+  // Compare the height of the left and right nodes
+  // Add the largest to count
+  // height(node = this.root, count = 0) {
+  //   if (node === null) return 0
+
+  //   count += 1;
+
+  //   const left = this.height(node.left);
+  //   const right = this.height(node.right);
+
+  //   count += (left > right) ? left : right;
+  //   return count;
+  // }
+
+  height(node = this.root) {
+    if (node === null) return 0;
+
+    let count = 0;
+    let left = 0;
+    let right = 0;
+
+    if (node.left) left += 1;
+    if (node.right) right += 1;
+
+    left += this.height(node.left);
+    right += this.height(node.right);
+
+    count = left > right ? left : right;
+    return count;
+  }
+
 
   prettyPrint(node = this.root, prefix = "", isLeft = true) {
     if (node === null) {
