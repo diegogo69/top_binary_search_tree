@@ -23,5 +23,9 @@ t.root = Tree.deleteItem(67, t.root);
 
 t.prettyPrint();
 
+// console.log(t.find(324))
+// console.log(t.find(325))
 // console.log(t.max());
 // console.log(t.min());
+
+t.levelOrder(a => console.log(a.data));

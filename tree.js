@@ -1,4 +1,5 @@
 import Node from "./node.js";
+import Queue from "./queue.js";
 
 class Tree {
   constructor(root) {
@@ -83,6 +84,11 @@ class Tree {
     // Item with no children
     if (node === null) return null;
 
+    // Compare given value with the value stored in current node
+    // If greater delete recursively in right node
+    // If lesser delete recursively in left node
+    // If equal eval cases based on the node children:
+    // leaf node, single child or two children 
     if (value > node.data) {
       node.right = this.deleteItem(value, node.right);
     } else if (value < node.data) {
@@ -116,6 +122,45 @@ class Tree {
 
     // Return node to keep the chain
     return node;
+  }
+
+  find(value, node = this.root) {
+    if (node === null) {
+      console.log('Not found')
+      return null
+    }
+
+    if (value > node.data) {
+      return this.find(value, node.right);
+
+    } else if (value < node.data) {
+      return this.find(value, node.left);
+
+    } else { 
+      console.log('Found!')
+      return node
+    }
+  }
+
+  levelOrder(fn) {
+    const queue = new Queue();
+
+    queue.add(this.root);
+
+    let node = queue.get();
+
+    while (node !== undefined) {
+      if (node !== null) {
+        // Visit node
+        fn(node);
+  
+        // Add children to queue
+        queue.add(node.left);
+        queue.add(node.right);
+      }
+
+      node = queue.get();
+    }
   }
 
   prettyPrint(node = this.root, prefix = "", isLeft = true) {
