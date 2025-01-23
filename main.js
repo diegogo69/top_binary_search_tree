@@ -1,8 +1,8 @@
 import Tree from "./tree.js";
 
 const arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 68, 6345, 324];
-const root = Tree.buildFrom(arr);
-const t = new Tree(root);
+// const root = Tree.buildFrom(arr);
+const t = new Tree(arr);
 
 t.prettyPrint();
 
@@ -12,14 +12,20 @@ t.insert(323)
 t.prettyPrint();
 
 // t.root = Tree.deleteItem(3, t.root);
+t.deleteItem(3);
+console.log('Deleted 3')
 
 t.prettyPrint();
 
 // t.root = Tree.deleteItem(5, t.root);
+t.deleteItem(5);
+console.log('Deleted 5')
 
 t.prettyPrint();
 
 // t.root = Tree.deleteItem(67, t.root);
+t.deleteItem(324);
+console.log('Deleted 324')
 
 t.prettyPrint();
 
